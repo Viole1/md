@@ -22,8 +22,7 @@ Graph* createGraph(int V, int E){
 	return graph;
 }
 
-void display(vector<int>& dist, int n)
-{
+void display(vector<int>& dist, int n){
 	cout << "Vertex   Distance from Source\n";
 	for (int i = 0; i < n; ++i)
 		cout << i + 1 << '\t' << dist[i] << endl;
@@ -49,6 +48,19 @@ void Ford(struct Graph* graph, int src)
 		}
 	}
 	display(dist, V);
+	cout << endl;
+
+	cout << "min(1-" << V << ") = " << V << ' ';
+	int k = V;
+	while (k > 0) {
+		if (dist[graph->edge[k].dest] - dist[graph->edge[k].src] == graph->edge[k].weight) {
+			cout << graph->edge[k].dest + 1 << ' ';
+			k = graph->edge[k].src - 1;
+		}
+		else k--;
+	}
+	cout << graph->edge[k].src + 1;
+
 	return;
 }
 void BK(vector< vector<int> >& matrix, int n, int k) {
